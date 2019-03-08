@@ -13,6 +13,7 @@
 #include <algorithm>
 #include <functional>
 
+
 template<typename T>
 bool floatingPointEquals(T lhs, T rhs)
 {
@@ -27,6 +28,7 @@ bool floatingPointEquals(T lhs, T rhs)
     
     return (a - b) <= a * eps * 2.0;
 }
+
 
 template<typename T>
 bool vectorEquals(const std::vector<T>& lhs, const std::vector<T>& rhs)
@@ -43,6 +45,7 @@ bool vectorEquals(const std::vector<T>& lhs, const std::vector<T>& rhs)
     
     return true;
 }
+
 
 void validate(
     const nn::NeuralNet& net,
@@ -72,7 +75,8 @@ void validate(
     }
 }
 
-int main(const int argc, const char* argv[]) {
+
+int main() {
 
     std::vector<nn::Num> input, solution;
 

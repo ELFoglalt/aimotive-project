@@ -2,7 +2,9 @@
 #define NEURALNET_H
 
 #include <vector>
+#include <array>
 #include <string>
+#include <initializer_list>
 
 namespace nn
 {

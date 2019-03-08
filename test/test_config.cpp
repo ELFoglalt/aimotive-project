@@ -6,12 +6,14 @@
 #include <config.h>
 #include <neuralnet.h>
 
+
 void fail(const char* reason) {
     std::cout << "Input neural network validation failed: " << reason << "\n";
     exit(1);
 }
 
-int main(const int argc, const char* argv[]) {
+
+int main() {
     const nn::Network& network = config::network;
 
     const int net_size = network.size();

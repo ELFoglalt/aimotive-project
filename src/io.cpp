@@ -3,22 +3,36 @@
 #include <stdexcept>
 #include <sstream>
 #include <algorithm>
+#include <regex>
 
 namespace nn
 {
-    
-    std::vector<Num> ParseInput(const int& argc, const char* argv[])
-        {
-            std::vector<Num> input(argc - 1, 0);
 
-            for(int i = 1; i < argc; i++) {
-                std::stringstream ss;
-                ss << argv[i];
-                ss >> input[i - 1];
+    // File locals
+    namespace
+    {
+        const std::regex rx_standard("[+-]?(?:\\d*\\.?\\d+)|(?:\\d+)");
+        const std::regex rx_scientific("[+-]?\\d*\\.?\\d*[eE][+-]?\\d+");
+    }
+
+
+    std::vector<Num> ParseInput(const int& argc, const char* argv[])
+    {
+        std::vector<Num> input(argc - 1, 0);
+
+        for (int i = 1; i < argc; i++) {
+            std::stringstream ss;
+            ss << argv[i];
+            if (! (std::regex_match(ss.str(), rx_standard) || std::regex_match(ss.str(), rx_scientific)))
+            {
+                throw std::runtime_error("Unknown input parameter \"" + ss.str() + "\"");
             }
 
-            return input;
+            ss >> input[i - 1];
         }
+
+        return input;
+    }
 
 
     std::string FormatOutput(

@@ -13,9 +13,30 @@
 #include <neuralnet.h>
 #include <stdexcept>
 
+
+
 namespace nn
 {
+    // File locals  
+    namespace
+    {
+        // Dot product that assumes that lhs.size() == rhs.size() + 1, and rhs.back() is the bias.
+        Num dotProdWBias(const std::vector<Num>& lhs, const std::vector<Num>& rhs)
+        {
+            Num res = rhs.back();
+            const int s = lhs.size();
+            for (int i = 0; i < s; ++i) {
+                res += lhs[i] * rhs[i];
+            }
+            return res;
+        }
+
+        inline Num ReLU(const Num& i) {
+            return std::max(i, (nn::Num)0);
+        }
+    }
     
+
     std::vector<Num> NeuralNet::apply(const std::vector<Num>& input) const
     {
         if ((int)input.size() != input_size()) {
@@ -30,18 +51,7 @@ namespace nn
             next = std::vector<Num>(n_outputs, 0);
 
             for (int i = 0; i < n_outputs; ++i) {
-                const std::vector<Num>& input_weights = weight_matrix[i];
-                const int n_inputs = input_weights.size() - 1;
-
-                // Connections
-                for (int j = 0; j < n_inputs; ++j) {
-                    next[i] += previous[j] * input_weights[j];
-                }
-                // Bias
-                next[i] += input_weights[n_inputs];
-
-                // ReLU
-                next[i] = std::max(next[i], (nn::Num)0);
+                next[i] = ReLU(dotProdWBias(previous, weight_matrix[i]));
             }
 
             previous = next;
@@ -50,9 +60,11 @@ namespace nn
         return next;
     }
 
+
     int NeuralNet::input_size() const {
         return network.front().front().size() - 1; // - 1 because of bias term
     }
+
 
     int NeuralNet::output_size() const {
         return network.back().size();

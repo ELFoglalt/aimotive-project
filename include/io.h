@@ -9,7 +9,7 @@ namespace nn {
     
     /**
      * Parses command line arguments (neural net input values) into a vector of nn::Nums.
-     * ! Non floating point parsable inputs parse to zeros.
+     * \throws std::runtime_error If input does not match floating point literal format.
      */
     std::vector<nn::Num> ParseInput(const int& argc, const char** argv);
 

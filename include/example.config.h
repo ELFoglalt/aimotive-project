@@ -9,7 +9,7 @@ namespace config
      * The default neural net used by the compiled executible.
      * See the declaration of nn::Network for details.
      */
-    nn::Network network({
+    static const nn::Network network({
         // In -> Hidden 1
         {
             { 0.0120, 0.0500, 0.0300, 0.0000 },
