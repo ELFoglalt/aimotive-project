@@ -46,12 +46,20 @@ namespace nn
         std::vector<Num> previous = input;
         std::vector<Num> next;
 
-        for (auto& weight_matrix : network) {
+        int num_l = network.size() - 1;
+        for (int l = 0; l <= num_l; ++l) {
+            const auto& weight_matrix = network[l];
             const int n_outputs = weight_matrix.size();
             next = std::vector<Num>(n_outputs, 0);
 
             for (int i = 0; i < n_outputs; ++i) {
-                next[i] = ReLU(dotProdWBias(previous, weight_matrix[i]));
+                if (l != num_l) {
+                    next[i] = ReLU(dotProdWBias(previous, weight_matrix[i]));
+                } else {
+                    // No ReLU on output layer per def.
+                    next[i] = dotProdWBias(previous, weight_matrix[i]);
+                }
+                
             }
 
             previous = next;

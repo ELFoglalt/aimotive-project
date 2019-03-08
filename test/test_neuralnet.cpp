@@ -108,21 +108,38 @@ int main() {
     validate(net2, input, solution);
 
 
-    // Test case 3: Relu
+    // Test case 3: Relu 1
+    // Output layer should not have ReLU.
     nn::NeuralNet net3({
         // In -> Out
         {
-            { 1.0, 0.000 } 
+            { 1.0, 0.000 }
+        }
+    });
+    input    = { -1.0 };
+    solution = {  1.0 };
+
+    validate(net3, input, solution);
+
+    // Test case 4: Relu 2
+    // Hidden layers *should* have ReLU.
+    nn::NeuralNet net4({
+        // In -> Out
+        {
+            { 1.0, 0.000 }
+        },
+        {
+            { 1.0, 0.000 }
         }
     });
     input    = { -1.0 };
     solution = {  0.0 };
 
-    validate(net3, input, solution);
+    validate(net4, input, solution);
 
 
-    // Test case 4: Example
-    nn::NeuralNet net4({
+    // Test case 5: Example
+    nn::NeuralNet net5({
         // In -> Hidden 1
         {
             { 0.0120, 0.0500, 0.0300, 0.0000 },
@@ -138,10 +155,10 @@ int main() {
     input    = { 0.2, -0.4, 0.6 };
     solution = { 1.1591e-3, 7.003e-4 };
 
-    validate(net4, input, solution);
+    validate(net5, input, solution);
 
-    // Test case 5: Rounding
-    nn::NeuralNet net5({
+    // Test case 6: Rounding
+    nn::NeuralNet net6({
         // In -> Hidden 1
         {
             { 1e-10, 0.0000 }
@@ -158,7 +175,7 @@ int main() {
     input    = { 1.0 };
     solution = { 1.0 };
 
-    validate(net5, input, solution);
+    validate(net6, input, solution);
 
 
     return 0;
