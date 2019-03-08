@@ -8,7 +8,7 @@ namespace nn
     std::vector<Number> NeuralNet::apply(const std::vector<Number>& input) const
     {
         if ((int)input.size() != input_size()) {
-            throw std::runtime_error("Invalid input parameters.");
+            throw std::runtime_error("Invalid number of input parameters.");
         }
 
         std::vector<Number> previous = input;

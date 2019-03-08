@@ -18,7 +18,7 @@ bool floatingPointEquals(T lhs, T rhs)
         std::swap(a , b);
     }
     
-    return (a - b) <= a * eps;
+    return (a - b) <= a * eps * 2.0;
 }
 
 template<typename T>
@@ -112,20 +112,40 @@ int main(const int argc, const char* argv[]) {
     nn::NeuralNet net4({
         // In -> Hidden 1
         {
-            { 0.1200, 0.0500, 0.0300, 0.0000 },
-            { 0.3200, 0.0100, 0.0135, 0.0000 },
+            { 0.0120, 0.0500, 0.0300, 0.0000 },
+            { 0.0320, 0.0100, 0.0135, 0.0000 },
             { 0.0450, 0.0200, 0.0230, 0.0000 }
-        }/*,
+        },
         // Hidden 1 -> Out
         {
             { 0.0370, 0.0230, 0.0610, 0.0000 },
             { 0.0420, 0.0510, 0.0100, 0.0000 }
-        }*/
+        }
     });
     input    = { 0.2, -0.4, 0.6 };
-    solution = { 1.591e-3, 7.003e-4 };
+    solution = { 1.1591e-3, 7.003e-4 };
 
     validate(net4, input, solution);
+
+        // Test case 5: Rounding
+    nn::NeuralNet net5({
+        // In -> Hidden 1
+        {
+            { 1e-10, 0.0000 }
+        },
+        // Hidden 1 -> Hidden 2
+        {
+            { 1e-10, 0.0000 }
+        },
+        // Hidden 2 -> Hidden 3
+        {
+            { 1e20, 0.0000 }
+        }
+    });
+    input    = { 1.0 };
+    solution = { 1.0 };
+
+    validate(net5, input, solution);
 
     return 0;
 }
