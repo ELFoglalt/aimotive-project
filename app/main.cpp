@@ -15,13 +15,15 @@ int main(const int argc, const char* argv[]) {
         result = net.apply(input);
     } catch (const std::runtime_error e) {
         std::cout << "Invalid number of input arguments. "
-                  << input.size()
-                  << " expected, "
                   << net.input_size()
+                  << " expected, "
+                  << input.size()
                   << " given.\n";
+
+        return 1;  
     }
 
-    std::cout << nn::FormatOutput(result);
+    std::cout << nn::FormatOutput(input, result);
     
 	return 0;
 }

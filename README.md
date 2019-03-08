@@ -1,22 +1,31 @@
 # Aimotive C++ test
+> A simple neral network implementation.
 
-## Building
+## Design notes
+
+
+## Build
 ### Debug
 ```sh
-# Build
-> mkdir -p ./build/debug
-> cd ./build/debug
-> cmake -DCMAKE_BUILD_TYPE=Debug ../.. && make
-# Run
-> ./neuralnet
+# Build in debug mode and run tests
+> ./scripts/build debug
+# Run the executable
+> ./build/debug/neuralnet 0.2 -0.4 0.6
 ```
 
 ### Release
 ```sh
-# Build
-> mkdir -p ./build/release
-> cd ./build/release
-> cmake -DCMAKE_BUILD_TYPE=Release ../.. && make
-# Run
-> ./neuralnet
+# Build in release mode and run tests
+> ./scripts/build release
+# Run the executable
+> ./build/release/neuralnet 0.2 -0.4 0.6
+
+# Clean buld directories
+> ./scripts/build clean
+```
+
+## Distribution
+```sh
+# Create dist folder with executible and docs:
+> ./scripts/dist
 ```

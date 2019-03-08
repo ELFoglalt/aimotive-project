@@ -5,7 +5,8 @@ if ( ${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR} )
     message( FATAL_ERROR "In-source builds not allowed. See README.md for use." )
 endif()
 
-set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++14" )
+set_property(GLOBAL PROPERTY CXX_STANDARD 14)
+set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall" )
 
 include_directories( include )
 file( GLOB_RECURSE SOURCES src/*.cpp )

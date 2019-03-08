@@ -27,7 +27,7 @@ namespace nn
                     next[i] += previous[j] * input_weights[j];
                 }
                 // Bias
-                next[i] += previous[n_inputs];
+                next[i] += input_weights[n_inputs];
 
                 // ReLU
                 next[i] = std::max(0.0, next[i]);

@@ -1,31 +1,53 @@
 #include <io.h>
 
 #include <stdexcept>
-#include <stdlib.h>
 #include <sstream>
+#include <algorithm>
 
 std::vector<double> nn::ParseInput(const int& argc, const char* argv[])
     {
         std::vector<double> input(argc - 1, 0);
 
         for(int i = 1; i < argc; i++) {
-            input[i - 1] = std::atof(argv[i]);
+            std::stringstream ss;
+            ss << argv[i];
+            ss >> input[i - 1];
         }
 
         return input;
     }
 
 
-std::string nn::FormatOutput(const std::vector<double>& results)
+std::string nn::FormatOutput(const std::vector<double>& inputs, const std::vector<double>& results)
 {
-    std::ostringstream output;
+    std::string format = "%+14.7f";
+    std::ostringstream inputs_stream;
+    for (auto& input : inputs) {
+        char buffer[16];
+        snprintf(buffer, sizeof(buffer), format.c_str(), input);
+        inputs_stream << buffer << ' ';
+    }
+    inputs_stream << "\n";
+    std::string inputs_srt = inputs_stream.str();
 
+    std::ostringstream results_stream;
     for (auto& result : results) {
         char buffer[16];
-        snprintf(buffer, sizeof(buffer), "%+14.4f", result);
-        output << buffer << ' ';
+        snprintf(buffer, sizeof(buffer), format.c_str(), result);
+        results_stream << buffer << ' ';
     }
-    output << "\n";
+    results_stream << "\n";
+    std::string results_srt = results_stream.str();
 
-    return output.str();
+    int len = std::max(inputs_srt.size(), results_srt.size()) + 2;
+    
+    std::string header = "Inputs ";
+    header += std::string(std::max(0, (int)(len - 2 - header.size())), '=') + "\n";
+    
+    std::string divider = "Results ";
+    divider += std::string(std::max(0, (int)(len - 2 - divider.size())), '=') + "\n";
+    
+    std::string footer = std::string(std::max(header.size(), divider.size()), '=') + "\n";
+
+    return header + inputs_srt + divider + results_srt + footer;
 }

@@ -36,10 +36,10 @@ namespace nn
     private:
         /**
          * Stores the neural net as a vector of weight matrixes.
-         * Given L hidden layers, the weights vector is L + 1 long.
+         * Given L hidden layers, the network consits of L + 1 matrixes.
          * If layer i has N neurons, and layer j has M neurons,
-         * weights[i] is expected to be an (M) x (N+1) matrix
-         * where row k weights[i][k] represents the input weights
+         * network[i] is expected to be an (M) x (N+1) matrix.
+         * Row k of the matrix (weights[i][k]) represents the input weights
          * of neuron k in layer j.
          * The last element of each row is the bias term.
          */

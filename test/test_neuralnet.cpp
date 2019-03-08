@@ -86,11 +86,12 @@ int main(const int argc, const char* argv[]) {
     nn::NeuralNet net2({
         // In -> Out
         {
-            { 1.0, 1.000 } 
+            { 0.5,  1.0 },
+            { 5.0, 10.0 } 
         }
     });
     input    = { 1.0 };
-    solution = { 2.0 };
+    solution = { 1.5, 15.0 };
 
     validate(net2, input, solution);
 

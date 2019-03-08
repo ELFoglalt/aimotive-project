@@ -21,7 +21,7 @@ namespace nn {
      *  \param IN A vector containing the results of the neural network.
      *  \return A multiline formatted string containing the results.
      */
-    std::string FormatOutput(const std::vector<Number>& results);
+    std::string FormatOutput(const std::vector<double>& inputs, const std::vector<Number>& results);
 
 } // << nn
 
