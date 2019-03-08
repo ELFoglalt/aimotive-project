@@ -19,8 +19,8 @@ if [[ -z "${CONFNAME// }" ]]; then
     echo -e "${ACC}No build configuration specified, using \"${CONFNAME}\"...${NC}"
 fi
 if ! [[ $CONFNAME =~ ^(debug|release)$ ]]; then
-    echo "${ERR}Unknown configuration \"${CONFNAME}\"${NC}"
-    echo "${ERR}Use \"debug\" or \"relese\"${NC}"
+    echo -e "${ERR}Unknown configuration \"${CONFNAME}\"${NC}"
+    echo -e "${ERR}Use \"debug\", \"relese\" or \"clean\"\n${NC}"
     exit
 fi
 
