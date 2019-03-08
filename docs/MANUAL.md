@@ -1,23 +1,23 @@
 # Aimotive C++ test
 
-> A simple neral network implementation by Máté Kerekes.
+>  A simple neural network implementation by Máté Kerekes.
 
-> This is the user readme. For documentation on the source code, see the `README.md` in the root directory of the project source.
+>  This is the user manual. For documentation on the source code, see the `README.md` in the root directory of the project source.
 
 
 ## Usage
 
 ```sh
-> neuralnet input1 input2 ... inputn
+>  neuralnet input1 input2 ... inputn
 ```
 
 With the default network:
 ```sh
-> neuralnet 0.2 -0.4 0.6
+>  neuralnet 0.2 -0.4 0.6
 Inputs =======================================
-    +0.2000000     -0.4000000     +0.6000000
+    +0.2000000 -0.4000000 +0.6000000
 Results ======================================
-    +0.0011591     +0.0007003
+    +0.0011591 +0.0007003
 ===============================================
 ```
 
@@ -31,12 +31,12 @@ Layers:
     Output (2 nodes)
 
 Weights:
-    Input -> Hidden 1
+    Input ->  Hidden 1
     0.1200, 0.0500, 0.0300, 0.0000 
     0.3200, 0.0100, 0.0135, 0.0000 
     0.0450, 0.0200, 0.0230, 0.0000 
 
-    Hidden 1 -> Output
+    Hidden 1 ->  Output
     0.0370, 0.0230, 0.0610, 0.0000
     0.0420, 0.0510, 0.0100, 0.0000
 ```

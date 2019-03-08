@@ -21,10 +21,11 @@ if [ ! -f ./build/release/neuralnet ] || [[ $1 =~ ^"-{1,2}[Yy]"$ ]]; then
     fi
 fi
 
-mkdir -p "./dist" && rm -f -r "./dist/*"
-(cp ./build/release/neuralnet ./dist && cp ./docs/* ./dist) || (echo -e "\n${ACC}Could not copy some files to dist folder.${NC}\n" & exit 1)
+rm -f -r "./dist"
+mkdir -p "./dist"
+zip ./dist/exec.zip ./build/release/neuralnet ./docs/*
+git archive --output="./dist/project.zip" HEAD
 
-echo -e "\n${ACC}Build output copied to \"./dist\"."
-echo -e "Run with \"./dist/neuralnet\" ${NC}\n"
+echo -e "\n${ACC}Build output copied to \"./dist\".${NC}\n"
 
 exit 0
