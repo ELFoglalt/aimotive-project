@@ -1,10 +1,17 @@
-// Since net is defined at compile time, sanity checks are done as tests instead of run-time checks.
+/**
+ * Test cases for the neural network implementation.
+ */
+
+#include <neuralnet.h>
 
 #include <iostream>
-#include <neuralnet.h>
 #include <cmath>
 #include <limits>
 #include <utility>
+#include <chrono>
+#include <random>
+#include <algorithm>
+#include <functional>
 
 template<typename T>
 bool floatingPointEquals(T lhs, T rhs)
@@ -37,11 +44,12 @@ bool vectorEquals(const std::vector<T>& lhs, const std::vector<T>& rhs)
     return true;
 }
 
-void validate(const nn::NeuralNet& net,
-              const std::vector<double>& input,
-              const std::vector<double>& solution)
+void validate(
+    const nn::NeuralNet& net,
+    const std::vector<nn::Num>& input,
+    const std::vector<nn::Num>& solution)
 {
-    std::vector<double> result = net.apply(input);
+    std::vector<nn::Num> result = net.apply(input);
 
     if (!vectorEquals(result, solution) ) {
         std::cout << "======================================\n";
@@ -66,7 +74,7 @@ void validate(const nn::NeuralNet& net,
 
 int main(const int argc, const char* argv[]) {
 
-    std::vector<double> input, solution;
+    std::vector<nn::Num> input, solution;
 
     // Test case 1: Single layer
     nn::NeuralNet net1({
@@ -128,7 +136,7 @@ int main(const int argc, const char* argv[]) {
 
     validate(net4, input, solution);
 
-        // Test case 5: Rounding
+    // Test case 5: Rounding
     nn::NeuralNet net5({
         // In -> Hidden 1
         {
@@ -147,6 +155,7 @@ int main(const int argc, const char* argv[]) {
     solution = { 1.0 };
 
     validate(net5, input, solution);
+
 
     return 0;
 }

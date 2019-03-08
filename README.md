@@ -1,10 +1,20 @@
 # Aimotive C++ test
-> A simple neral network implementation
+> A simple neral network implementation by Máté Kerekes.
 
 ## Configuration
-To modify the implemented neural net, edit the default network in `config.h`. For details about the representation and structure of the network constant, see the definition of `nn::Network` in `neuralnet.h`.
+To modify the neural net, edit the `network` definition in `config.h`. For details about the representation and structure of the network constant, see the definition of `Network` in `neuralnet.h`.
 
 ## Design notes
+This is a straightforward network implementation that favours readable code and convienience over both performance and generality. 
+
+
+### Improvement directions
+
+### Network data structure
+
+### Botlenecks
+
+
 
 
 ## Scripts

@@ -8,20 +8,12 @@
 namespace nn {
     
     /**
-     *  Parses command line arguments (neural net input values) into a vector of doubles.
-     *  ! Non double-parsable values parse with undefined behaviour.
-     *  \param IN argc The number of command line arguments.
-     *  \param IN argv Command line arguments.
-     *  \return Vector of doubles as parsed from argv.
+     * Parses command line arguments (neural net input values) into a vector of nn::Nums.
+     * ! Non floating point parsable inputs parse to zeros.
      */
-    std::vector<double> ParseInput(const int& argc, const char** argv);
-    
-    /**
-     *  Formats a vector of doubles as neural network results.
-     *  \param IN A vector containing the results of the neural network.
-     *  \return A multiline formatted string containing the results.
-     */
-    std::string FormatOutput(const std::vector<double>& inputs, const std::vector<double>& results);
+    std::vector<nn::Num> ParseInput(const int& argc, const char** argv);
+
+    std::string FormatOutput(const std::vector<nn::Num>& inputs, const std::vector<nn::Num>& results);
 
 } // << nn
 

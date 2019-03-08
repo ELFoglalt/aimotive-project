@@ -7,11 +7,11 @@
 
 int main(const int argc, const char* argv[]) {
 
-    const std::vector<nn::Number> input = nn::ParseInput(argc, argv);
+    const std::vector<nn::Num> input = nn::ParseInput(argc, argv);
 
     const nn::NeuralNet net(config::network);
 
-    std::vector<nn::Number> result;
+    std::vector<nn::Num> result;
     
     try {
         result = net.apply(input);

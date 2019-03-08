@@ -1,4 +1,6 @@
-// Since net is defined at compile time, sanity checks are done as tests instead of run-time checks.
+/**
+ * Test cases for malformed network in config.
+ */
 
 #include <iostream>
 #include <config.h>
@@ -14,7 +16,6 @@ int main(const int argc, const char* argv[]) {
 
     const int net_size = network.size();
 
-    // Net should not be empty.
     if (!net_size) {
         fail("Network contains no nodes.");
     }

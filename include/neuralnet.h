@@ -4,11 +4,14 @@
 #include <vector>
 #include <string>
 
-//TODO: Documentation
-
 namespace nn
 {
-    using Matrix = std::vector<std::vector<double> >;
+    /**
+     * Generic floating point number defined to allow swapping
+     * single/double etc. precision if needed.
+     */
+    using Num = double;
+    using Matrix = std::vector<std::vector<Num> >;
 
     /**
      * Represents a neural network as a vector of weight matrixes.
@@ -30,11 +33,10 @@ namespace nn
          * \throws std::runtime_error If number of inputs does not matches
          *         the expectations of the network.
          */
-        std::vector<double> apply(const std::vector<double>& input) const;
-        
-        std::string visualize() const; //TODO: Write as << operator?
+        std::vector<Num> apply(const std::vector<Num>& input) const;
     
         int input_size() const;
+        
         int output_size() const;
 
     private:

@@ -1,6 +1,6 @@
 # Aimotive C++ test
 
-> A simple neral network implementation.
+> A simple neral network implementation by Máté Kerekes.
 
 > This is the user readme. For documentation on the source code, see the `README.md` in the root directory of the project source.
 
