@@ -1,0 +1,37 @@
+#!/bin/bash
+
+ACC="\033[36m"
+ERR="\033[31m"
+NC="\033[0m"
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+cd "${DIR}/.."
+
+CONFNAME=$1
+
+if [[ $CONFNAME =~ ^clean$ ]]; then
+    rm -r -f ./build/* && echo -e "\n${ACC}Cleaned up all build files.${NC}\n"
+    exit 0
+fi
+
+if [[ -z "${CONFNAME// }" ]]; then
+    CONFNAME="debug"
+    echo -e "${ACC}No build configuration specified, using \"${CONFNAME}\"...${NC}"
+fi
+if ! [[ $CONFNAME =~ ^(debug|release)$ ]]; then
+    echo "${ERR}Unknown configuration \"${CONFNAME}\"${NC}"
+    echo "${ERR}Use \"debug\" or \"relese\"${NC}"
+    exit
+fi
+
+if [ ! -e "./include/config.h" ]; then
+    cp ./include/example.config.h ./include/config.h
+    echo '//! Local copy of "example.config.h". This file is not tracked in git.' | cat - ./include/config.h > temp && mv temp ./include/config.h
+fi
+
+FOLDER="./build/${CONFNAME}"
+mkdir -p ${FOLDER} && cd ${FOLDER}
+( cmake -DCMAKE_BUILD_TYPE=Debug ../.. && make && make test ARGS="-V") || echo -e "\n${ERR}There were build errors, check the logs above.${NC}\n"
+
+echo -e "\n${ACC}\"${CONFNAME}\" build and tests finished.${NC}\n"
+exit 0

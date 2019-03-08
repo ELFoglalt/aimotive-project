@@ -1,0 +1,30 @@
+#!/bin/bash
+
+ACC="\033[36m"
+ERR="\033[31m"
+NC="\033[0m"
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+cd "${DIR}/.."
+
+if [ ! -f ./build/release/neuralnet ] || [[ $1 =~ ^"-{1,2}[Yy]"$ ]]; then
+    echo -e "${ACC}Release build not found in build directory."
+    read -p "Would you like to build now? (y/N) " -n 1 -r
+    echo -e -n "${NC}\n"
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        DID_BUILD=1
+        ./script/build release || exit 1
+    else
+        echo -e "\n${ACC}Build cancelled.${NC}\n" 
+        exit 0
+    fi
+fi
+
+mkdir -p "./dist" && rm -f -r "./dist/*"
+(cp ./build/release/neuralnet ./dist && cp ./docs/* ./dist) || (echo -e "\n${ACC}Could not copy some files to dist folder.${NC}\n" & exit 1)
+
+echo -e "\n${ACC}Build output copied to \"./dist\"."
+echo -e "Run with \"./dist/neuralnet\" ${NC}\n"
+
+exit 0
