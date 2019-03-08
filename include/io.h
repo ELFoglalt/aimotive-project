@@ -14,14 +14,14 @@ namespace nn {
      *  \param IN argv Command line arguments.
      *  \return Vector of doubles as parsed from argv.
      */
-    std::vector<Number> ParseInput(const int& argc, const char** argv);
+    std::vector<double> ParseInput(const int& argc, const char** argv);
     
     /**
      *  Formats a vector of doubles as neural network results.
      *  \param IN A vector containing the results of the neural network.
      *  \return A multiline formatted string containing the results.
      */
-    std::string FormatOutput(const std::vector<double>& inputs, const std::vector<Number>& results);
+    std::string FormatOutput(const std::vector<double>& inputs, const std::vector<double>& results);
 
 } // << nn
 

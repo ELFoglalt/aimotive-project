@@ -8,13 +8,17 @@
 
 namespace nn
 {
+    using Matrix = std::vector<std::vector<double> >;
+
     /**
-     * Arbitrary precision floating point number.
-     * Declared explicitly to allow the use of implementation specific types.
-     * ? Is this really necessary? Adds complexity.
+     * Represents a neural network as a vector of weight matrixes.
+     * Given L hidden layers, the network consits of L + 1 matrixes.
+     * If layer i has N neurons, and layer j has M neurons,
+     * network[i] is expected to be an (M) x (N+1) matrix.
+     * Row k of the matrix (weights[i][k]) represents the input weights
+     * of neuron k in layer j.
+     * The last element of each row is the bias term.
      */
-    using Number = double;
-    using Matrix = std::vector<std::vector<Number> >;
     using Network = std::vector<Matrix>;
     
     class NeuralNet {
@@ -26,7 +30,7 @@ namespace nn
          * \throws std::runtime_error If number of inputs does not matches
          *         the expectations of the network.
          */
-        std::vector<Number> apply(const std::vector<Number>& input) const;
+        std::vector<double> apply(const std::vector<double>& input) const;
         
         std::string visualize() const; //TODO: Write as << operator?
     
@@ -34,15 +38,6 @@ namespace nn
         int output_size() const;
 
     private:
-        /**
-         * Stores the neural net as a vector of weight matrixes.
-         * Given L hidden layers, the network consits of L + 1 matrixes.
-         * If layer i has N neurons, and layer j has M neurons,
-         * network[i] is expected to be an (M) x (N+1) matrix.
-         * Row k of the matrix (weights[i][k]) represents the input weights
-         * of neuron k in layer j.
-         * The last element of each row is the bias term.
-         */
         const Network network;
     };
 

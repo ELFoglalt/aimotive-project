@@ -1,6 +1,8 @@
-#include <iostream>
 #include <io.h>
 #include <config.h>
+#include <neuralnet.h>
+
+#include <iostream>
 #include <sstream>
 
 int main(const int argc, const char* argv[]) {

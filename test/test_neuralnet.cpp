@@ -38,10 +38,10 @@ bool vectorEquals(const std::vector<T>& lhs, const std::vector<T>& rhs)
 }
 
 void validate(const nn::NeuralNet& net,
-              const std::vector<nn::Number>& input,
-              const std::vector<nn::Number>& solution)
+              const std::vector<double>& input,
+              const std::vector<double>& solution)
 {
-    std::vector<nn::Number> result = net.apply(input);
+    std::vector<double> result = net.apply(input);
 
     if (!vectorEquals(result, solution) ) {
         std::cout << "======================================\n";
@@ -66,7 +66,7 @@ void validate(const nn::NeuralNet& net,
 
 int main(const int argc, const char* argv[]) {
 
-    std::vector<nn::Number> input, solution;
+    std::vector<double> input, solution;
 
     // Test case 1: Single layer
     nn::NeuralNet net1({

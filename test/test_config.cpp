@@ -16,7 +16,7 @@ int main(const int argc, const char* argv[]) {
 
     // Net should not be empty.
     if (!net_size) {
-        fail("Network contains no data.");
+        fail("Network contains no nodes.");
     }
     
     int prev_w = -1;
@@ -30,11 +30,11 @@ int main(const int argc, const char* argv[]) {
 
         int current_w = weight_matrix[0].size();
         if (current_w < 2) {
-            fail("Neuron with no or bias only input.");
+            fail("Neuron with no- or bias only input.");
         }
         for (int i = 1; i < (int)weight_matrix.size(); ++i) {
             if (weight_matrix[i].size() < 2) {
-                fail("Neuron with no or bias only input.");
+                fail("Neuron with no- or bias only input.");
             }       
 
             if ((int)weight_matrix[i].size() != current_w) {
@@ -44,7 +44,7 @@ int main(const int argc, const char* argv[]) {
 
         if (prev_w != -1 && prev_h != -1) {
             if (current_w - 1 != prev_h) {
-                fail("Number of layer outputs does not match number of inputs in the following layer.");
+                fail("Number of layer outputs is not compatible with inputs in the following layer.");
             }
         }
 

@@ -6,8 +6,7 @@
 // A namespace for compile time configuration constants.
 namespace config
 {
-
-    // The neural net used by the compiled executible.
+    // The default neural net used by the compiled executible.
     nn::Network network({
         // In -> Hidden 1
         {
