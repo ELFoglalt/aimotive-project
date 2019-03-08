@@ -24,7 +24,7 @@ fi
 rm -f -r "./dist"
 mkdir -p "./dist"
 zip ./dist/exec.zip ./build/release/neuralnet ./docs/*
-git archive --output="./dist/project.zip" HEAD
+git archive --output="./dist/project.tar.gz" HEAD
 
 echo -e "\n${ACC}Build output copied to \"./dist\".${NC}\n"
 
